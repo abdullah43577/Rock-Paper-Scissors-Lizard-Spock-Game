@@ -1,0 +1,210 @@
+@import "https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,600;0,700;1,600;1,700&display=swap";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+section#body > .outer-container--spock > .inner-container--spock, section#body > .outer-container--lizard > .inner-container--lizard, section#body > .outer-container--rock > .inner-container--rock, section#body > .outer-container--paper > .inner-container--paper, section#body > .outer-container--scissors > .inner-container--scissors {
+  width: 100%;
+  background-color: #ddd9d9;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  display: flex;
+  box-shadow: 3px 3px 5px 3px #0000001a;
+}
+
+html, body {
+  min-height: 100%;
+  width: 100%;
+  background: linear-gradient(to top right, #1f3756, #141539) no-repeat;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Barlow Semi Condensed, sans-serif;
+  display: flex;
+  position: relative;
+}
+
+main {
+  width: 800px;
+  max-width: 800px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+main > #head {
+  width: 100%;
+  max-height: 120px;
+  border: 1px solid #606e85;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  padding: 5px 10px;
+  display: flex;
+}
+
+main > #head > img {
+  max-height: 100px;
+}
+
+main > #head > .points-container {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 40px 0;
+  padding: 5px 20px;
+}
+
+main > #head > .points-container > p {
+  color: #00f;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+main > #head > .points-container > h1 {
+  color: #3b4363;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+section#body {
+  width: 450px;
+  margin: 40px 0;
+  position: relative;
+}
+
+section#body > img {
+  width: 100%;
+}
+
+section#body > .outer-container--scissors {
+  cursor: pointer;
+  width: 120px;
+  background: linear-gradient(to top right, #ec9e0e, #eca922);
+  border-radius: 100%;
+  padding: 15px;
+  transition: scale .5s ease-in-out;
+  position: absolute;
+  top: 0;
+  right: 190px;
+  transform: translate(20px, -20px);
+}
+
+section#body > .outer-container--scissors:hover {
+  scale: 1.05;
+}
+
+section#body > .outer-container--scissors > .inner-container--scissors > img {
+  width: 100%;
+}
+
+section#body > .outer-container--paper {
+  cursor: pointer;
+  width: 120px;
+  background: linear-gradient(to top right, #4865f4, #5671f5);
+  border-radius: 100%;
+  padding: 15px;
+  transition: scale .5s ease-in-out;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(40px, 130px);
+}
+
+section#body > .outer-container--paper:hover {
+  scale: 1.05;
+}
+
+section#body > .outer-container--paper > .inner-container--paper > img {
+  width: 80%;
+}
+
+section#body > .outer-container--rock {
+  cursor: pointer;
+  width: 120px;
+  background: linear-gradient(to top right, #dc2e4e, #d24b64);
+  border-radius: 100%;
+  padding: 15px;
+  transition: scale .5s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(-40px, 20px);
+}
+
+section#body > .outer-container--rock:hover {
+  scale: 1.05;
+}
+
+section#body > .outer-container--rock > .inner-container--rock > img {
+  width: 100%;
+}
+
+section#body > .outer-container--lizard {
+  cursor: pointer;
+  width: 120px;
+  background: linear-gradient(to top right, #834fe3, #8c5de5);
+  border-radius: 100%;
+  padding: 15px;
+  transition: scale .5s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(30px, 30px);
+}
+
+section#body > .outer-container--lizard:hover {
+  scale: 1.05;
+}
+
+section#body > .outer-container--lizard > .inner-container--lizard > img {
+  width: 100%;
+}
+
+section#body > .outer-container--spock {
+  cursor: pointer;
+  width: 120px;
+  background: linear-gradient(to top right, #40b9ce, #52bed1);
+  border-radius: 100%;
+  padding: 15px;
+  transition: scale .5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-30px, 100px);
+}
+
+section#body > .outer-container--spock:hover {
+  scale: 1.05;
+}
+
+section#body > .outer-container--spock > .inner-container--spock > img {
+  width: 80%;
+}
+
+.rules {
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 8px 20px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.rules:hover {
+  background: linear-gradient(to top right, #dc2e4e, #d24b64);
+}
+
+/*# sourceMappingURL=index.dda6fa14.css.map */

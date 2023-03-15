@@ -1,0 +1,5 @@
+style-guide.md
+.parcel-cache
+node_modules
+src/design
+package-lock.json

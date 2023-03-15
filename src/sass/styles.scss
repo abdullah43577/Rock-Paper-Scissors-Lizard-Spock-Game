@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+
+@import 'config';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@mixin background($property) {
+  border-radius: 100%;
+  padding: 15px;
+  position: absolute;
+  cursor: pointer;
+  width: 120px;
+
+  @if $property == scissors {
+    background: $scissorsGradient;
+    top: 0;
+    right: 190px;
+    transform: translate(20px, -20px);
+  } @else if $property == paper {
+    background: $paperGradient;
+    top: 0;
+    transform: translate(40px, 130px);
+    right: 0;
+  } @else if $property == rock {
+    background: $rockGradident;
+    right: 0;
+    transform: translate(-40px, 20px);
+    bottom: 0;
+  } @else if $property == lizard {
+    background: $lizardGradient;
+    bottom: 0;
+    left: 0;
+    transform: translate(30px, 30px);
+  } @else if $property == spock {
+    background: $spockGradient;
+    top: 0;
+    left: 0;
+    transform: translate(-30px, 100px);
+  }
+}
+
+%props-style--inner {
+  // width: 100px;
+  width: 100%;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ddd9d9;
+  padding: 20px;
+  box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  background: $radialGradient;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-repeat: no-repeat;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+main {
+  width: 800px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > #head {
+    border: 1px solid $headerOutline;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    width: 100%;
+    margin: 10px 0;
+    max-height: 120px;
+
+    > img {
+      max-height: 100px;
+    }
+
+    > .points-container {
+      background-color: #ffffff;
+      padding: 5px 20px;
+      text-align: center;
+      margin: 40px 0;
+      border-radius: 5px;
+
+      > p {
+        font-size: 18px;
+        color: blue;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      > h1 {
+        font-weight: bold;
+        color: $darkTxt;
+        font-size: 40px;
+      }
+    }
+  }
+}
+
+section#body {
+  width: 450px;
+  position: relative;
+  margin: 40px 0;
+
+  > img {
+    width: 100%;
+  }
+
+  > .outer-container--scissors {
+    @include background(scissors);
+    transition: scale 500ms ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+
+    > .inner-container--scissors {
+      @extend %props-style--inner;
+
+      > img {
+        width: 100%;
+      }
+    }
+  }
+
+  > .outer-container--paper {
+    @include background(paper);
+    transition: scale 500ms ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+
+    > .inner-container--paper {
+      @extend %props-style--inner;
+
+      > img {
+        width: 80%;
+      }
+    }
+  }
+
+  > .outer-container--rock {
+    @include background(rock);
+    transition: scale 500ms ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+
+    > .inner-container--rock {
+      @extend %props-style--inner;
+
+      > img {
+        width: 100%;
+      }
+    }
+  }
+
+  > .outer-container--lizard {
+    @include background(lizard);
+    transition: scale 500ms ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+
+    > .inner-container--lizard {
+      @extend %props-style--inner;
+
+      > img {
+        width: 100%;
+      }
+    }
+  }
+
+  > .outer-container--spock {
+    @include background(spock);
+    transition: scale 500ms ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+
+    > .inner-container--spock {
+      @extend %props-style--inner;
+
+      > img {
+        width: 80%;
+      }
+    }
+  }
+}
+
+.rules {
+  border: 1px solid #ffffff;
+  color: white;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  background: transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background: $rockGradident;
+  }
+}
