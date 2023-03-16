@@ -61,8 +61,8 @@ If the player wins, they gain 1 point. If the computer wins, the player loses on
 
 ### Links
 
-- Solution URL: [Solution URL here](https://your-solution-url.com)
-- Live Site URL: [Live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution URL here](https://www.frontendmentor.io/solutions/responsive-rock-paper-scissors-lizard-spock-game-built-using-jsscss-zOTOEmn8BC)
+- Live Site URL: [Live site URL here](https://playrpsls.netlify.app/)
 
 ## My process
 
@@ -74,7 +74,7 @@ If the player wins, they gain 1 point. If the computer wins, the player loses on
 - SCSS/SASS
 - Desktop-first workflow
 - Vanilla Javascript
-- [Parcel]() - code bundling application used in minifying and reducing production file sizes.
+- [Parcel](https://parceljs.org/) - code bundling application used in minifying and reducing production file sizes.
 
 ### What I learned
 
