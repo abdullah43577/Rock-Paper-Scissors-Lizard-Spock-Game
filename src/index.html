@@ -16,7 +16,7 @@
 
         <div class="points-container">
           <p>Score</p>
-          <h1>5</h1>
+          <h1 class="points">0</h1>
         </div>
       </section>
 
@@ -54,31 +54,37 @@
         </div>
       </section>
 
-      <!-- <section class="winnerDeclarator">
+      <section class="winnerDeclarator hidden">
         <div class="userPicked">
           <h2>You picked</h2>
 
-          <div class="outer-container--scissors" data-prop="scissors">
-            <div class="inner-container--scissors" data-prop="scissors">
-              <img src="./images/icon-scissors.svg" alt="icon-scissors" data-prop="scissors"/>
-            </div>
-          </div>
+          <div class="circle player1"></div>
         </div>
+
+        <div class="winnerLoserContainer">
+          <h1 class="winorlose hidden"></h1>
+          <button class="playAgain hidden">play again</button>
+        </div>
+
         <div class="computerPicked">
           <h2>The house picked</h2>
 
-          <div class="outer-container--scissors" data-prop="scissors">
-            <div class="inner-container--scissors">
-              <img src="./images/icon-scissors.svg" alt="icon-scissors" />
-            </div>
-          </div>
+          <div class="circle computer"></div>
         </div>
-      </section> -->
+      </section>
     </main>
 
     <footer>
       <button class="rules">Rules</button>
-      <!-- <div class="attribution">Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#" target="_blank">Abdullah Ayoola</a>.</div> -->
+      <div class="rulesModal hidden">
+        <div class="hd">
+          <h2>rules</h2>
+          <img src="./images/icon-close.svg" alt="icon-close" class="iconClose" />
+        </div>
+
+        <img src="./images/image-rules-bonus.svg" alt="image-rules-bonus" />
+      </div>
+      <div class="overlay hidden"></div>
     </footer>
   </body>
 </html>

@@ -4,7 +4,7 @@
   "description": "![Design preview for the Rock, Paper, Scissors coding challenge](./design/desktop-preview.jpg)",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel ./src/index.html",
+    "start": "parcel serve ./src/index.html",
     "build": "parcel build ./src/index.html"
   },
   "keywords": [],

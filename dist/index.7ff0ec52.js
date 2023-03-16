@@ -557,8 +557,33 @@ function hmrAccept(bundle, id) {
 }
 
 },{}],"dUn2x":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _helpers = require("./helpers");
+var _8BitDreamLand142093Mp3 = require("url:../soundTracks/8-bit-dream-land-142093.mp3");
+var _8BitDreamLand142093Mp3Default = parcelHelpers.interopDefault(_8BitDreamLand142093Mp3);
+var _strangerThings124008Mp3 = require("url:../soundTracks/stranger-things-124008.mp3");
+var _strangerThings124008Mp3Default = parcelHelpers.interopDefault(_strangerThings124008Mp3);
+var _winAtAnyCost16273Mp3 = require("url:../soundTracks/win-at-any-cost-16273.mp3");
+var _winAtAnyCost16273Mp3Default = parcelHelpers.interopDefault(_winAtAnyCost16273Mp3);
+var _success16297Mp3 = require("url:../soundTracks/success-1-6297.mp3");
+var _success16297Mp3Default = parcelHelpers.interopDefault(_success16297Mp3);
+var _mixkitHorrorLose2028Wav = require("url:../soundTracks/mixkit-horror-lose-2028.wav");
+var _mixkitHorrorLose2028WavDefault = parcelHelpers.interopDefault(_mixkitHorrorLose2028Wav);
+var _pianoCrashSound37898Mp3 = require("url:../soundTracks/piano-crash-sound-37898.mp3");
+var _pianoCrashSound37898Mp3Default = parcelHelpers.interopDefault(_pianoCrashSound37898Mp3);
+const body = document.querySelector("body");
 const propContainer = document.getElementById("body");
+const player1 = document.querySelector(".player1");
+const computer = document.querySelector(".computer");
+const winnerDeclarator = document.querySelector(".winnerDeclarator");
+const playAgain = document.querySelector(".playAgain");
+const points = document.querySelector(".points");
+const winorlose = document.querySelector(".winorlose");
+const rulesWindow = document.querySelector(".rulesModal");
+const overlay = document.querySelector(".overlay");
+const btnCloseModal = document.querySelector(".iconClose");
+const rulesBtn = document.querySelector(".rules");
+let pointsAccumulated = parseInt(localStorage.getItem("points")) || 0;
 let allProps = [
     "scissors",
     "paper",
@@ -569,35 +594,114 @@ let allProps = [
 console.log(allProps);
 let userPicked;
 let computerPicked;
+let audioPlaying = false;
+const allBgAudio = [
+    (0, _8BitDreamLand142093Mp3Default.default),
+    (0, _strangerThings124008Mp3Default.default),
+    (0, _winAtAnyCost16273Mp3Default.default)
+];
+// play background audio
+const audio = function(parameter) {
+    if (!audioPlaying) {
+        let audioEl = new Audio(parameter);
+        audioEl.volume = 0.1;
+        audioEl.play();
+        audioPlaying = true;
+        audioEl.onended = ()=>{
+            audioPlaying = false;
+            let randomAudio = (0, _helpers.randomizeProps)(allBgAudio);
+            audio(randomAudio);
+        };
+    }
+};
+const winOrLoseSound = function(parameter) {
+    const audioElement = new Audio(parameter);
+    audioElement.play();
+};
 propContainer.addEventListener("click", function(e) {
+    let randomAudio = (0, _helpers.randomizeProps)(allBgAudio);
+    audio(randomAudio);
     userPicked = e.target.dataset.prop;
-    console.log(userPicked);
+    // hide current container
+    propContainer.classList.add("hidden");
+    // set the flex property of the body element
+    body.classList.add("playerActive");
+    let userSelected = document.querySelector(`.outer-container--${userPicked}`);
+    userSelected.classList.add("mobile-outer--container");
+    userSelected.firstElementChild.classList.add("mobile-inner--container");
+    // append player1 selected item into container
+    player1.appendChild(userSelected.cloneNode(true));
+    // unhide to container to declare winner
+    winnerDeclarator.classList.remove("hidden");
     setTimeout(()=>{
         computerPicked = (0, _helpers.randomizeProps)(allProps);
-        console.log(computerPicked);
-        test();
+        let computerSelected = document.querySelector(`.outer-container--${computerPicked}`);
+        computerSelected.classList.add("mobile-outer--container");
+        computerSelected.firstElementChild.classList.add("mobile-inner--container");
+        computer.appendChild(computerSelected.cloneNode(true));
+        simulateResult();
     }, 2000);
 });
-function test() {
+const unveilPlayAgainBtn = function() {
+    setTimeout(()=>{
+        playAgain.classList.remove("hidden");
+    }, 1000);
+};
+if (pointsAccumulated) points.textContent = pointsAccumulated;
+const simulateResult = function() {
     const outcome = (0, _helpers.gameOutcomes)[userPicked][computerPicked];
+    winorlose.classList.remove("hidden");
     switch(outcome){
         case "win":
-            console.log("win");
-            console.log("add +1");
+            winorlose.textContent = "you win";
+            winOrLoseSound((0, _success16297Mp3Default.default));
+            unveilPlayAgainBtn();
+            points.textContent = Number(points.textContent) + 1;
+            localStorage.setItem("points", points.textContent.toString());
             break;
         case "lose":
-            console.log("lose");
-            console.log("deduct -1");
+            winorlose.textContent = "you lose";
+            winOrLoseSound((0, _mixkitHorrorLose2028WavDefault.default));
+            unveilPlayAgainBtn();
+            // check to see if the value is going to negative angle
+            if (Number(points.textContent) < 1) {
+                points.textContent = 0;
+                return;
+            }
+            points.textContent = Number(points.textContent) - 1;
+            localStorage.setItem("points", points.textContent.toString());
             break;
         case "draw":
-            console.log("draw");
+            winorlose.textContent = "draw!";
+            winOrLoseSound((0, _pianoCrashSound37898Mp3Default.default));
+            unveilPlayAgainBtn();
             break;
         default:
-            console.log("draw");
+            winorlose.textContent = "draw!";
+            unveilPlayAgainBtn();
     }
-}
+};
+playAgain.addEventListener("click", function() {
+    propContainer.classList.remove("hidden");
+    winnerDeclarator.classList.add("hidden");
+    body.classList.remove("playerActive");
+    player1.innerHTML = computer.innerHTML = "";
+    winorlose.classList.add("hidden");
+    playAgain.classList.add("hidden");
+});
+const showModalWindow = function() {
+    rulesWindow.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+};
+const closeModalWindow = function() {
+    rulesWindow.classList.add("hidden");
+    overlay.classList.add("hidden");
+};
+rulesBtn.addEventListener("click", showModalWindow);
+btnCloseModal.addEventListener("click", closeModalWindow);
+overlay.addEventListener("click", closeModalWindow);
 
-},{"./helpers":"lG1z4"}],"lG1z4":[function(require,module,exports) {
+},{"./helpers":"lG1z4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../soundTracks/8-bit-dream-land-142093.mp3":"cnrSr","url:../soundTracks/stranger-things-124008.mp3":"k5nrk","url:../soundTracks/win-at-any-cost-16273.mp3":"gvqbr","url:../soundTracks/success-1-6297.mp3":"gBROY","url:../soundTracks/mixkit-horror-lose-2028.wav":"5OF2S","url:../soundTracks/piano-crash-sound-37898.mp3":"3q4vu"}],"lG1z4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "randomizeProps", ()=>randomizeProps);
@@ -669,6 +773,58 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["ko2YT","dUn2x"], "dUn2x", "parcelRequire784c")
+},{}],"cnrSr":[function(require,module,exports) {
+module.exports = require("79ea7b3d0b6aa1f3").getBundleURL("dH6Y1") + "8-bit-dream-land-142093.419553be.mp3" + "?" + Date.now();
+
+},{"79ea7b3d0b6aa1f3":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"k5nrk":[function(require,module,exports) {
+module.exports = require("78c2a3db1ace0c6a").getBundleURL("dH6Y1") + "stranger-things-124008.fab044ad.mp3" + "?" + Date.now();
+
+},{"78c2a3db1ace0c6a":"lgJ39"}],"gvqbr":[function(require,module,exports) {
+module.exports = require("7f764f7e32ffe43f").getBundleURL("dH6Y1") + "win-at-any-cost-16273.3fbdfae1.mp3" + "?" + Date.now();
+
+},{"7f764f7e32ffe43f":"lgJ39"}],"gBROY":[function(require,module,exports) {
+module.exports = require("6df730d0aee0632b").getBundleURL("dH6Y1") + "success-1-6297.dce48877.mp3" + "?" + Date.now();
+
+},{"6df730d0aee0632b":"lgJ39"}],"5OF2S":[function(require,module,exports) {
+module.exports = require("bb7046cd2220c0b1").getBundleURL("dH6Y1") + "mixkit-horror-lose-2028.46124ca5.wav" + "?" + Date.now();
+
+},{"bb7046cd2220c0b1":"lgJ39"}],"3q4vu":[function(require,module,exports) {
+module.exports = require("e09737aaddd038d6").getBundleURL("dH6Y1") + "piano-crash-sound-37898.d673134a.mp3" + "?" + Date.now();
+
+},{"e09737aaddd038d6":"lgJ39"}]},["ko2YT","dUn2x"], "dUn2x", "parcelRequire784c")
 
 //# sourceMappingURL=index.7ff0ec52.js.map
