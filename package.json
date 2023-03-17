@@ -8,7 +8,7 @@
     "build": "parcel build ./src/index.html"
   },
   "keywords": [],
-  "author": "",
+  "author": "Abdullah Ayoola",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.3",

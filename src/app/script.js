@@ -21,7 +21,6 @@ const rulesBtn = document.querySelector('.rules');
 let pointsAccumulated = parseInt(localStorage.getItem('points')) || 0;
 
 let allProps = ['scissors', 'paper', 'rock', 'lizard', 'spock'];
-console.log(allProps);
 
 let userPicked;
 let computerPicked;
@@ -55,7 +54,9 @@ propContainer.addEventListener('click', function (e) {
   let randomAudio = randomizeProps(allBgAudio);
   audio(randomAudio);
 
+  // simulating result here like real life rock paper scissors game
   userPicked = e.target.dataset.prop;
+  computerPicked = randomizeProps(allProps);
 
   // hide current container
   propContainer.classList.add('hidden');
@@ -71,11 +72,10 @@ propContainer.addEventListener('click', function (e) {
   // append player1 selected item into container
   player1.appendChild(userSelected.cloneNode(true));
 
-  // unhide to container to declare winner
+  // unhide the container to declare winner
   winnerDeclarator.classList.remove('hidden');
 
   setTimeout(() => {
-    computerPicked = randomizeProps(allProps);
     let computerSelected = document.querySelector(`.outer-container--${computerPicked}`);
 
     computerSelected.classList.add('mobile-outer--container');
@@ -127,6 +127,7 @@ const simulateResult = function () {
 
     default:
       winorlose.textContent = 'draw!';
+      winOrLoseSound(draw);
       unveilPlayAgainBtn();
   }
 };
